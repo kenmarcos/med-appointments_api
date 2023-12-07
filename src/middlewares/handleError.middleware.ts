@@ -3,7 +3,7 @@ import AppError from "../errors/AppError.error";
 import { ZodError } from "zod";
 import { JsonWebTokenError } from "jsonwebtoken";
 
-export const handleError = (
+const handleError = (
   err: unknown,
   req: Request,
   res: Response,
@@ -24,3 +24,5 @@ export const handleError = (
   console.log(err);
   return res.status(500).json({ message: "Internal server error" });
 };
+
+export default handleError;
