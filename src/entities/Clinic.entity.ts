@@ -9,9 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Address from "./Address.entity";
-import Specialty from "./Specialty.entity";
-import Appointment from "./Appointments.entity";
+import { Address, Appointment, Specialty } from "../entities";
 
 @Entity("clinics")
 export default class Clinic {

@@ -1,5 +1,5 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import Clinic from "./Clinic.entity";
+import { Clinic } from "../entities";
 
 @Entity("addresses")
 export default class Address {
