@@ -1,4 +1,6 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -8,6 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Appointment } from "../entities";
+import bcryptjs, { getRounds } from "bcryptjs";
 
 @Entity("users")
 export default class User {
@@ -37,4 +40,16 @@ export default class User {
 
   @OneToMany(() => Appointment, (appointment) => appointment.user)
   appointments: Appointment[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    // verificar se a senha já está criptografada
+    const hasRounds = getRounds(this.password);
+
+    // se não estiver criptografada, criptografar a senha
+    if (!hasRounds) {
+      this.password = bcryptjs.hashSync(this.password, 10);
+    }
+  }
 }
