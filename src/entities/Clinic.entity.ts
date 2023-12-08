@@ -9,7 +9,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Address, Appointment, Specialty } from "../entities";
+import Address from "./Address.entity";
+import Specialty from "./Specialty.entity";
+import Appointment from "./Appointments.entity";
 
 @Entity("clinics")
 export default class Clinic {
@@ -25,11 +27,11 @@ export default class Clinic {
   @Column({ type: "integer", default: 0 })
   beds: number;
 
-  @CreateDateColumn({ type: "date" })
-  partnerSince: string;
+  @CreateDateColumn()
+  partnerSince: Date;
 
-  @UpdateDateColumn({ type: "date" })
-  infosUpdateAt: string;
+  @UpdateDateColumn()
+  infosUpdateAt: Date;
 
   @OneToOne(() => Address, (address) => address.clinic)
   @JoinColumn()

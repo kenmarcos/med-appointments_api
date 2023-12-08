@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const appointmentSchema = z.object({
+const appointment = z.object({
   id: z.string(),
   date: z.string(),
   time: z.string(),
@@ -8,7 +8,12 @@ export const appointmentSchema = z.object({
   clinicId: z.string(),
 });
 
-export const appointmentCreateSchema = appointmentSchema.omit({
+const create = appointment.omit({
   id: true,
   userId: true,
 });
+
+export default {
+  appointment,
+  create,
+};

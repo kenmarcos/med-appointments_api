@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Clinic, User } from "../entities";
+import User from "./User.entity";
+import Clinic from "./Clinic.entity";
 
 @Entity("appointments")
 export default class Appointment {

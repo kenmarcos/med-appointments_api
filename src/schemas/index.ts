@@ -1,31 +1,6 @@
-import {
-  userSchema,
-  userCreateSchema,
-  userWithoutAdmin,
-  userUpdateSchema,
-  userResponseSchema,
-  userReadSchema,
-  userLoginSchema,
-} from "./user.schemas";
-import { clinicSchema, clinicCreateSchema } from "./clinic.schemas";
-import {
-  appointmentSchema,
-  appointmentCreateSchema,
-} from "./appointment.schemas";
-import { specialtySchema, specialtyCreateSchema } from "./specialty.schemas";
+import userSchema from "./user.schema";
+import clinicSchema from "./clinic.schema";
+import appointmentSchema from "./appointment.schema";
+import specialtySchema from "./specialty.schema";
 
-export {
-  userSchema,
-  userCreateSchema,
-  userWithoutAdmin,
-  userUpdateSchema,
-  userResponseSchema,
-  userReadSchema,
-  userLoginSchema,
-  clinicSchema,
-  clinicCreateSchema,
-  appointmentSchema,
-  appointmentCreateSchema,
-  specialtySchema,
-  specialtyCreateSchema,
-};
+export { userSchema, clinicSchema, appointmentSchema, specialtySchema };

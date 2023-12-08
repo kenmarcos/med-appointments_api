@@ -9,12 +9,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Appointment } from "../entities";
 import bcryptjs, { getRounds } from "bcryptjs";
+import Appointment from "./Appointments.entity";
 
 @Entity("users")
 export default class User {
-  @PrimaryGeneratedColumn("identity")
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ length: 120 })
@@ -29,14 +29,14 @@ export default class User {
   @Column({ length: 120 })
   password: string;
 
-  @CreateDateColumn({ type: "date" })
-  createdAt: string;
+  @CreateDateColumn()
+  createdAt: Date;
 
-  @UpdateDateColumn({ type: "date" })
-  updatedAt: string;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-  @DeleteDateColumn({ type: "date", nullable: true })
-  deletedAt: string | null;
+  @DeleteDateColumn({ nullable: true })
+  deletedAt: Date | null;
 
   @OneToMany(() => Appointment, (appointment) => appointment.user)
   appointments: Appointment[];

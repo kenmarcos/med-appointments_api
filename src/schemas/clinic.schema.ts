@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-export const clinicSchema = z.object({
+const clinic = z.object({
   id: z.string(),
   public: z.boolean().default(true),
   name: z.string().max(120),
   beds: z.number().positive().int(),
-  partnerSince: z.string(),
-  infosUpdateAt: z.string(),
+  partnerSince: z.date(),
+  infosUpdateAt: z.date(),
   address: z.object({
     street: z.string().max(120),
     zip: z.string().max(8),
@@ -16,8 +16,13 @@ export const clinicSchema = z.object({
   specialtyId: z.string(),
 });
 
-export const clinicCreateSchema = clinicSchema.omit({
+const create = clinic.omit({
   id: true,
   partnerSince: true,
   infosUpdateAt: true,
 });
+
+export default {
+  clinic,
+  create,
+};

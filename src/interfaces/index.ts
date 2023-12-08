@@ -1,4 +1,4 @@
-import { SpecialtyRepo, SpecialtyCreate } from "./specialty.interfaces";
+import { SpecialtyRepo, SpecialtyCreate } from "./specialty.interface";
 import {
   UserRepo,
   UserCreate,
@@ -7,9 +7,9 @@ import {
   UserResponse,
   UserLogin,
   UserLoginResponse,
-} from "./user.interfaces";
-import { ClinicCreate, ClinicRepo, AddressRepo } from "./clinic.interfaces";
-import { AppointmentCreate, AppointmentRepo } from "./appointment.interfaces";
+} from "./user.interface";
+import { ClinicCreate, ClinicRepo, AddressRepo } from "./clinic.interface";
+import { AppointmentCreate, AppointmentRepo } from "./appointment.interface";
 
 export {
   UserCreate,
