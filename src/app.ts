@@ -2,7 +2,7 @@ import "reflect-metadata";
 import "express-async-errors";
 import express, { Application } from "express";
 import dotenv from "dotenv";
-import { handleError } from "./middlewares";
+import { globalMiddleware } from "./middlewares";
 import router from "./routes";
 import swaggerUiExpress from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
@@ -21,6 +21,6 @@ app.use(
 
 app.use("/api", router);
 
-app.use(handleError);
+app.use(globalMiddleware.handleError);
 
 export default app;

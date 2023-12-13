@@ -1,5 +1,4 @@
-import handleError from "./handleError.middleware";
-import validateData from "./validateData.middleware";
+import globalMiddleware from "./global.middleware";
 import userMiddleware from "./user.middleware";
 
-export { handleError, validateData, userMiddleware };
+export { globalMiddleware, userMiddleware };
