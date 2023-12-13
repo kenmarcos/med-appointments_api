@@ -19,6 +19,81 @@
   ],
 
   "paths": {
+    "/login": {
+      "post": {
+        "description": "Login to get token",
+        "tags": ["Session"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD REQUEST",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "requiredFieldError": {
+                    "value": {
+                      "message": {
+                        "email": ["Required"],
+                        "password": ["Required"]
+                      }
+                    }
+                  },
+                  "invalidEmailError": {
+                    "value": {
+                      "message": {
+                        "email": ["Invalid email"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UNAUTHORIZED",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidUserError": {
+                    "value": {
+                      "message": "Invalid user"
+                    }
+                  },
+                  "wrongPasswordError": {
+                    "value": {
+                      "message": "Wrong password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "description": "Create a new user",
@@ -43,6 +118,45 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "BAD REQUEST",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "requiredFieldError": {
+                    "value": {
+                      "message": {
+                        "name": ["Required"],
+                        "email": ["Required"],
+                        "password": ["Required"]
+                      }
+                    }
+                  },
+                  "invalidEmailError": {
+                    "value": {
+                      "message": {
+                        "email": ["Invalid email"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "CONFLICT",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "conflictError": {
+                    "value": {
+                      "message": "User with this email already exists"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -51,6 +165,18 @@
 
   "components": {
     "schemas": {
+      "login": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
       "createUser": {
         "type": "object",
         "required": ["name", "email", "password"],
@@ -98,18 +224,6 @@
           "deletedAt": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "loginUser": {
-        "type": "object",
-        "required": ["email", "password"],
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
           }
         }
       }
