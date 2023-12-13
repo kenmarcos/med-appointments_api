@@ -97,7 +97,7 @@
     "/users": {
       "post": {
         "description": "Create a new user",
-        "tags": ["Users"],
+        "tags": ["User"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -152,6 +152,63 @@
                   "conflictError": {
                     "value": {
                       "message": "User with this email already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get all users",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/readUser"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UNAUTHORIZED",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingTokenError": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "tokenMalformedError": {
+                    "value": {
+                      "message": "jwt malformed"
+                    }
+                  },
+                  "tokenInvalidSignatureError": {
+                    "value": {
+                      "message": "invalid signature"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "insufficientPermissionError": {
+                    "value": {
+                      "message": "Insufficient permission"
                     }
                   }
                 }
