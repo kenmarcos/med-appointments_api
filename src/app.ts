@@ -3,7 +3,7 @@ import "express-async-errors";
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import { handleError } from "./middlewares";
-import routes from "./routes";
+import router from "./routes";
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ const app: Application = express();
 
 app.use(express.json());
 
-routes(app);
+app.use("/api", router);
 
 app.use(handleError);
 
