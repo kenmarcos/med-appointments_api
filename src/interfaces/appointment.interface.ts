@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { appointmentCreateSchema } from "../schemas";
+import { appointmentSchema } from "../schemas";
 import { Repository } from "typeorm";
 import { Appointment } from "../entities";
 
-export type AppointmentCreate = z.infer<typeof appointmentCreateSchema>;
+export type AppointmentCreate = z.infer<typeof appointmentSchema.create>;
 
 export type AppointmentRepo = Repository<Appointment>;
