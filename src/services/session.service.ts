@@ -8,11 +8,11 @@ const login = async (data: UserLogin) => {
   const user = await userRepo.findOneBy({ email: data.email });
 
   if (!user) {
-    throw new AppError("Invalid credentials", 401);
+    throw new AppError("Invalid user", 401);
   }
 
   if (!bcryptjs.compareSync(data.password, user.password)) {
-    throw new AppError("Invalid credentials", 401);
+    throw new AppError("Wrong password", 401);
   }
 
   const token = jwt.sign(
