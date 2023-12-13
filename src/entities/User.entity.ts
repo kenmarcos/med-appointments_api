@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import bcryptjs, { getRounds } from "bcryptjs";
-import Appointment from "./Appointments.entity";
+import Appointment from "./Appointment.entity";
 
 @Entity("users")
 export default class User {

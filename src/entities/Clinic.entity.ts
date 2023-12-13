@@ -11,7 +11,7 @@ import {
 } from "typeorm";
 import Address from "./Address.entity";
 import Specialty from "./Specialty.entity";
-import Appointment from "./Appointments.entity";
+import Appointment from "./Appointment.entity";
 
 @Entity("clinics")
 export default class Clinic {
