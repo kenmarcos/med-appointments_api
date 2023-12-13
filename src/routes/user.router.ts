@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userMiddleware, validateData } from "../middlewares";
+import { globalMiddleware, userMiddleware } from "../middlewares";
 import { userController } from "../controllers";
 import { userSchema } from "../schemas";
 
@@ -7,9 +7,16 @@ const userRouter = Router();
 
 userRouter.post(
   "/",
-  validateData(userSchema.create),
+  globalMiddleware.validateBody(userSchema.create),
   userMiddleware.verifyEmail,
   userController.create
+);
+
+userRouter.get(
+  "/",
+  globalMiddleware.verifyToken,
+  globalMiddleware.verifyAdmin,
+  userController.readAll
 );
 
 export default userRouter;

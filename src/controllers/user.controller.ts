@@ -7,6 +7,13 @@ const create = async (req: Request, res: Response) => {
   res.status(201).json(newUser);
 };
 
+const readAll = async (req: Request, res: Response) => {
+  const users = await userService.readAll();
+
+  res.status(200).json(users);
+};
+
 export default {
   create,
+  readAll,
 };

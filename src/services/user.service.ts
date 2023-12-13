@@ -10,6 +10,13 @@ const create = async (data: UserCreate) => {
   return userSchema.response.parse(newUser);
 };
 
+const readAll = async () => {
+  const users = await userRepo.find();
+
+  return users;
+};
+
 export default {
   create,
+  readAll,
 };
