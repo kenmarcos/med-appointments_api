@@ -21,9 +21,9 @@ userRouter.get(
 
 userRouter.patch(
   "/:userId",
-  globalMiddleware.validateBody(userSchema.update),
   globalMiddleware.verifyToken,
   globalMiddleware.verifyPermission,
+  globalMiddleware.validateBody(userSchema.update),
   userMiddleware.verifyUserExists,
   userController.update
 );

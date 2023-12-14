@@ -9,6 +9,9 @@ export default class Address {
   @Column({ length: 120 })
   street: string;
 
+  @Column({ type: "integer" })
+  number: number;
+
   @Column({ length: 8 })
   zip: string;
 

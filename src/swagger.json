@@ -213,7 +213,7 @@
                 "examples": {
                   "insufficientPermissionError": {
                     "value": {
-                      "message": "Insufficient permission"
+                      "message": "Insufficient permission. Only admins"
                     }
                   }
                 }
@@ -265,7 +265,7 @@
                 "examples": {
                   "insufficientPermissionError": {
                     "value": {
-                      "message": "Insufficient permission"
+                      "message": "Insufficient permission. Only the owner or admins"
                     }
                   }
                 }
@@ -312,7 +312,7 @@
                 "examples": {
                   "insufficientPermissionError": {
                     "value": {
-                      "message": "Insufficient permission"
+                      "message": "Insufficient permission. Only the owner or admins"
                     }
                   }
                 }
@@ -454,7 +454,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/readSpecialty"
+                  "$ref": "#/components/schemas/readSpecialtyDetails"
                 }
               }
             }
@@ -467,6 +467,92 @@
                   "specialtyNotFoundError": {
                     "value": {
                       "message": "Specialty not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clinics": {
+      "post": {
+        "description": "Create a new clinic",
+        "tags": ["Clinic"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/createClinic"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/readClinic"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UNAUTHORIZED",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingTokenError": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "tokenMalformedError": {
+                    "value": {
+                      "message": "jwt malformed"
+                    }
+                  },
+                  "tokenInvalidSignatureError": {
+                    "value": {
+                      "message": "invalid signature"
+                    }
+                  },
+                  "tokenExpiredError": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "insufficientPermissionError": {
+                    "value": {
+                      "message": "Insufficient permission. Only admins"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "CONFLICT",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "addressAlreadyExistsError": {
+                    "value": {
+                      "message": "Address already exists"
                     }
                   }
                 }
@@ -573,12 +659,72 @@
           },
           "name": {
             "type": "string"
+          }
+        }
+      },
+      "readSpecialtyDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           },
           "clinics": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/readClinic"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "public": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "name": {
+                  "type": "string"
+                },
+                "beds": {
+                  "type": "number"
+                },
+                "address": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/address"
+                },
+                "partnerSince": {
+                  "type": "string"
+                },
+                "infosUpdateAt": {
+                  "type": "string"
+                }
+              }
             }
+          }
+        }
+      },
+      "createClinic": {
+        "type": "object",
+        "required": ["name", "address", "specialtyId"],
+        "properties": {
+          "public": {
+            "type": "boolean",
+            "default": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "beds": {
+            "type": "number",
+            "default": 0
+          },
+          "address": {
+            "type": "object",
+            "$ref": "#/components/schemas/address"
+          },
+          "specialtyId": {
+            "type": "string"
           }
         }
       },
@@ -598,10 +744,38 @@
           "beds": {
             "type": "number"
           },
+          "address": {
+            "type": "object",
+            "$ref": "#/components/schemas/address"
+          },
           "partnerSince": {
             "type": "string"
           },
           "infosUpdateAt": {
+            "type": "string"
+          },
+          "specialty": {
+            "type": "object",
+            "$ref": "#/components/schemas/readSpecialty"
+          }
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "zip": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
             "type": "string"
           }
         }

@@ -9,20 +9,31 @@ const clinic = z.object({
   infosUpdateAt: z.date(),
   address: z.object({
     street: z.string().max(120),
+    number: z.number().positive().int(),
     zip: z.string().max(8),
     city: z.string().max(50),
     state: z.string().max(2),
   }),
   specialtyId: z.string(),
+  specialty: z.object({
+    id: z.string(),
+    name: z.string().max(120),
+  }),
 });
 
 const create = clinic.omit({
   id: true,
   partnerSince: true,
   infosUpdateAt: true,
+  specialty: true,
+});
+
+const response = clinic.omit({
+  specialtyId: true,
 });
 
 export default {
   clinic,
   create,
+  response,
 };

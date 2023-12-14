@@ -20,7 +20,9 @@ const readOne = async (specialtyId: string) => {
       id: specialtyId,
     },
     relations: {
-      clinics: true,
+      clinics: {
+        address: true,
+      },
     },
   });
 
