@@ -196,6 +196,11 @@
                     "value": {
                       "message": "invalid signature"
                     }
+                  },
+                  "tokenExpiredError": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
                   }
                 }
               }
@@ -330,6 +335,94 @@
           }
         }
       }
+    },
+    "/specialties": {
+      "post": {
+        "description": "Create a new specialty",
+        "tags": ["Specialty"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/createSpecialty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/readSpecialty"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD REQUEST",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "requiredFieldError": {
+                    "value": {
+                      "message": {
+                        "name": ["Required"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UNAUTHORIZED",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingTokenError": {
+                    "value": {
+                      "message": "Missing bearer token"
+                    }
+                  },
+                  "tokenMalformedError": {
+                    "value": {
+                      "message": "jwt malformed"
+                    }
+                  },
+                  "tokenInvalidSignatureError": {
+                    "value": {
+                      "message": "invalid signature"
+                    }
+                  },
+                  "tokenExpiredError": {
+                    "value": {
+                      "message": "jwt expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "insufficientPermissionError": {
+                    "value": {
+                      "message": "Insufficient permission. Only admins"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
 
@@ -407,6 +500,26 @@
             "type": "string"
           },
           "password": {
+            "type": "string"
+          }
+        }
+      },
+      "createSpecialty": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "readSpecialty": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
             "type": "string"
           }
         }
