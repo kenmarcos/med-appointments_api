@@ -1,5 +1,5 @@
 import { User } from "../entities";
-import { UserCreate } from "../interfaces";
+import { UserBodyUpdate, UserCreate, UserUpdate } from "../interfaces";
 import { userRepo } from "../repositories";
 import { userSchema } from "../schemas";
 
@@ -17,6 +17,13 @@ const readAll = async () => {
   return userSchema.readAll.parse(users);
 };
 
+const update = async (user: User, data: UserBodyUpdate) => {
+  const updatedUser = userRepo.create({ ...user, ...data });
+  await userRepo.save(updatedUser);
+
+  return userSchema.response.parse(updatedUser);
+};
+
 const remove = async (user: User) => {
   await userRepo.softRemove(user);
 };
@@ -24,6 +31,6 @@ const remove = async (user: User) => {
 export default {
   create,
   readAll,
-
+  update,
   remove,
 };

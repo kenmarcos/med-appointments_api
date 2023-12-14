@@ -19,6 +19,15 @@ userRouter.get(
   userController.readAll
 );
 
+userRouter.patch(
+  "/:userId",
+  globalMiddleware.validateBody(userSchema.update),
+  globalMiddleware.verifyToken,
+  globalMiddleware.verifyPermission,
+  userMiddleware.verifyUserExists,
+  userController.update
+);
+
 userRouter.delete(
   "/:userId",
   globalMiddleware.verifyToken,
