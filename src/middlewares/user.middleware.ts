@@ -14,6 +14,25 @@ const verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
+const verifyUserExists = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { userId } = req.params;
+
+  const user = await userRepo.findOneBy({ id: userId });
+
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+
+  res.locals = { ...res.locals, user };
+
+  return next();
+};
+
 export default {
   verifyEmail,
+  verifyUserExists,
 };
