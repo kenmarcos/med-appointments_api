@@ -216,6 +216,53 @@
             }
           }
         }
+      },
+      "delete": {
+        "description": "Delete a user",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "userId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NO CONTENT"
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "insufficientPermissionError": {
+                    "value": {
+                      "message": "Insufficient permission"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "NOT FOUND",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "userNotFoundError": {
+                    "value": {
+                      "message": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
