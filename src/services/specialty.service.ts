@@ -14,7 +14,21 @@ const readAll = async () => {
   return specialtySchema.readAll.parse(specialties);
 };
 
+const readOne = async (specialtyId: string) => {
+  const specialty = await specialtyRepo.findOne({
+    where: {
+      id: specialtyId,
+    },
+    relations: {
+      clinics: true,
+    },
+  });
+
+  return specialty;
+};
+
 export default {
   create,
   readAll,
+  readOne,
 };

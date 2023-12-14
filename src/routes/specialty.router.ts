@@ -16,4 +16,10 @@ specialtyRouter.post(
 
 specialtyRouter.get("/", specialtyController.readAll);
 
+specialtyRouter.get(
+  "/:specialtyId",
+  specialtyMiddleware.verifySpecialtyExists,
+  specialtyController.readOne
+);
+
 export default specialtyRouter;
