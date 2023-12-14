@@ -19,4 +19,12 @@ userRouter.get(
   userController.readAll
 );
 
+userRouter.delete(
+  "/:userId",
+  globalMiddleware.verifyToken,
+  globalMiddleware.verifyPermission,
+  userMiddleware.verifyUserExists,
+  userController.remove
+);
+
 export default userRouter;

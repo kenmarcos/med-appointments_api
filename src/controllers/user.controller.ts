@@ -13,7 +13,17 @@ const readAll = async (req: Request, res: Response) => {
   res.status(200).json(users);
 };
 
+const remove = async (req: Request, res: Response) => {
+  const { user } = res.locals;
+
+  await userService.remove(user);
+
+  res.status(204).json();
+};
+
 export default {
   create,
   readAll,
+
+  remove,
 };

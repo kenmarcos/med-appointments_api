@@ -1,3 +1,4 @@
+import { User } from "../entities";
 import { UserCreate } from "../interfaces";
 import { userRepo } from "../repositories";
 import { userSchema } from "../schemas";
@@ -13,10 +14,16 @@ const create = async (data: UserCreate) => {
 const readAll = async () => {
   const users = await userRepo.find();
 
-  return users;
+  return userSchema.readAll.parse(users);
+};
+
+const remove = async (user: User) => {
+  await userRepo.softRemove(user);
 };
 
 export default {
   create,
   readAll,
+
+  remove,
 };

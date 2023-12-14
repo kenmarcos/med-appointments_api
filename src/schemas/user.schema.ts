@@ -28,7 +28,7 @@ const response = user.omit({
   password: true,
 });
 
-const read = response.array();
+const readAll = response.array();
 
 const login = user.pick({
   email: true,
@@ -41,6 +41,6 @@ export default {
   userWithoutAdmin,
   update,
   response,
-  read,
+  readAll,
   login,
 };
