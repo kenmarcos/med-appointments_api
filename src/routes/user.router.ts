@@ -8,7 +8,7 @@ const userRouter = Router();
 userRouter.post(
   "/",
   globalMiddleware.validateBody(userSchema.create),
-  userMiddleware.verifyEmail,
+  userMiddleware.verifyUniqueEmail,
   userController.create
 );
 

@@ -2,7 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import { userRepo } from "../repositories";
 import AppError from "../errors/AppError.error";
 
-const verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
+const verifyUniqueEmail = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { email } = req.body;
 
   const user = await userRepo.findOneBy({ email });
@@ -33,6 +37,6 @@ const verifyUserExists = async (
 };
 
 export default {
-  verifyEmail,
+  verifyUniqueEmail,
   verifyUserExists,
 };
