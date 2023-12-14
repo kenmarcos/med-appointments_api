@@ -58,4 +58,25 @@ const verifyAdmin = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
-export default { handleError, validateBody, verifyToken, verifyAdmin };
+const verifyPermission = (req: Request, res: Response, next: NextFunction) => {
+  const { userId } = req.params;
+  const { sub, admin } = res.locals.decoded;
+
+  if (admin) {
+    return next();
+  }
+
+  if (userId !== sub) {
+    throw new AppError("Insufficient permission", 403);
+  }
+
+  return next();
+};
+
+export default {
+  handleError,
+  validateBody,
+  verifyToken,
+  verifyAdmin,
+  verifyPermission,
+};
