@@ -8,6 +8,13 @@ const create = async (data: SpecialtyCreate) => {
   return specialtySchema.specialty.parse(newSpecialty);
 };
 
+const readAll = async () => {
+  const specialties = await specialtyRepo.find();
+
+  return specialtySchema.readAll.parse(specialties);
+};
+
 export default {
   create,
+  readAll,
 };

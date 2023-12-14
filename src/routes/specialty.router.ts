@@ -3,7 +3,7 @@ import { specialtyController } from "../controllers";
 import { globalMiddleware, specialtyMiddleware } from "../middlewares";
 import { specialtySchema } from "../schemas";
 
-export const specialtyRouter = Router();
+const specialtyRouter = Router();
 
 specialtyRouter.post(
   "/",
@@ -13,3 +13,7 @@ specialtyRouter.post(
   specialtyMiddleware.verifyUniqueSpecialtyName,
   specialtyController.create
 );
+
+specialtyRouter.get("/", specialtyController.readAll);
+
+export default specialtyRouter;

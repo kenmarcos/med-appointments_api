@@ -9,7 +9,10 @@ const create = specialty.omit({
   id: true,
 });
 
+const readAll = specialty.array();
+
 export default {
   specialty,
   create,
+  readAll,
 };
