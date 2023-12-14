@@ -545,6 +545,20 @@
               }
             }
           },
+          "404": {
+            "description": "NOT FOUND",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "specialtyNotFoundError": {
+                    "value": {
+                      "message": "Specialty not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "409": {
             "description": "CONFLICT",
             "content": {
@@ -554,6 +568,25 @@
                     "value": {
                       "message": "Address already exists"
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get all clinics",
+        "tags": ["Clinic"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/readClinic"
                   }
                 }
               }
