@@ -1,5 +1,5 @@
 import { User } from "../entities";
-import { UserBodyUpdate, UserCreate, UserUpdate } from "../interfaces";
+import { UserCreate, UserUpdate } from "../interfaces";
 import { userRepo } from "../repositories";
 import { userSchema } from "../schemas";
 
@@ -17,7 +17,7 @@ const readAll = async () => {
   return userSchema.readAll.parse(users);
 };
 
-const update = async (user: User, data: UserBodyUpdate) => {
+const update = async (user: User, data: UserUpdate) => {
   const updatedUser = userRepo.create({ ...user, ...data });
   await userRepo.save(updatedUser);
 

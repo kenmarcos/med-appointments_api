@@ -18,11 +18,11 @@ const create = user.omit({
   deletedAt: true,
 });
 
-const userWithoutAdmin = create.omit({
+const createWithoutIsAdminField = create.omit({
   isAdmin: true,
 });
 
-const update = userWithoutAdmin.partial();
+const update = createWithoutIsAdminField.partial();
 
 const response = user.omit({
   password: true,
@@ -38,7 +38,7 @@ const login = user.pick({
 export default {
   user,
   create,
-  userWithoutAdmin,
+  createWithoutIsAdminField,
   update,
   response,
   readAll,

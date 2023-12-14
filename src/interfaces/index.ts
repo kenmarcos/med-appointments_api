@@ -2,7 +2,6 @@ import { SpecialtyRepo, SpecialtyCreate } from "./specialty.interface";
 import {
   UserRepo,
   UserCreate,
-  UserBodyUpdate,
   UserUpdate,
   UserResponse,
   UserLogin,
@@ -13,7 +12,6 @@ import { AppointmentCreate, AppointmentRepo } from "./appointment.interface";
 
 export {
   UserCreate,
-  UserBodyUpdate,
   UserUpdate,
   UserResponse,
   UserLogin,
