@@ -14,4 +14,6 @@ clinicRouter.post(
   clinicController.create
 );
 
+clinicRouter.get("/", clinicController.readAll);
+
 export default clinicRouter;

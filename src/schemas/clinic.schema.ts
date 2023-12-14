@@ -32,8 +32,11 @@ const response = clinic.omit({
   specialtyId: true,
 });
 
+const readAll = response.array();
+
 export default {
   clinic,
   create,
   response,
+  readAll,
 };

@@ -21,6 +21,18 @@ const create = async (data: ClinicCreate) => {
   return clinicSchema.response.parse(clinic);
 };
 
+const readAll = async () => {
+  const clinics = await clinicRepo.find({
+    relations: {
+      address: true,
+      specialty: true,
+    },
+  });
+
+  return clinicSchema.readAll.parse(clinics);
+};
+
 export default {
   create,
+  readAll,
 };

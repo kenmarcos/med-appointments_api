@@ -7,6 +7,13 @@ const create = async (req: Request, res: Response) => {
   return res.status(201).json(newClinic);
 };
 
+const readAll = async (req: Request, res: Response) => {
+  const clinics = await clinicService.readAll();
+
+  return res.status(200).json(clinics);
+};
+
 export default {
   create,
+  readAll,
 };
