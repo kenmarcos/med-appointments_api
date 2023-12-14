@@ -52,7 +52,7 @@ const verifyAdmin = (req: Request, res: Response, next: NextFunction) => {
   const { isAdmin } = res.locals.decoded;
 
   if (!isAdmin) {
-    throw new AppError("Insufficient permission", 403);
+    throw new AppError("Insufficient permission. Only admins", 403);
   }
 
   return next();
@@ -67,7 +67,10 @@ const verifyPermission = (req: Request, res: Response, next: NextFunction) => {
   }
 
   if (userId !== sub) {
-    throw new AppError("Insufficient permission", 403);
+    throw new AppError(
+      "Insufficient permission. Only the owner or admins",
+      403
+    );
   }
 
   return next();
